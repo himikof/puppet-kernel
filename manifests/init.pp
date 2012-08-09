@@ -20,17 +20,18 @@ class kernel (
         ensure   => 'installed',
         tag      => 'buildhost';
       }
-      portage::use_flags { 'gentoo-sources':
-        context => 'kernel_gentoo_sources',
-        package => 'sys-kernel/gentoo-sources',
+      $kernel_sources = 'gentoo-sources'
+      portage::use_flags { 'kernel_sources':
+        context => 'kernel_sources',
+        package => "sys-kernel/$kernel_sources",
         use     => 'symlink',
         tag     => 'buildhost'
       }
       package { 'kernel_sources':
-        name     => 'gentoo-sources',
+        name     => $kernel_sources,
         ensure   => 'latest',
         tag      => 'buildhost',
-        require  => [Portage::Use_flags['gentoo-sources']],
+        require  => [Portage::Use_flags['kernel_sources']],
       }
       
       $genkernel_options = [
