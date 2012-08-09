@@ -38,6 +38,7 @@ class kernel (
           true    => "--lvm",
           default => [],
         },
+        "--makeopts=\"-j${::processorcount}\"",
         "all",
       ]
       $genkernel_options_str = join(flatten($genkernel_options), ' ')
