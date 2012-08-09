@@ -46,6 +46,7 @@ class kernel (
       exec { 'genkernel':
         command     => "/usr/bin/genkernel $genkernel_options_str",
         refreshonly => true,
+        timeout     => 0,
         require     => Package['genkernel'],
         subscribe   => Package['kernel_sources'],
       }
