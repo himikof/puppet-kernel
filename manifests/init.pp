@@ -10,6 +10,7 @@ import 'stdlib'
 #
 class kernel (
   $lvm = false,
+  $ensure = 'present',
 ) {
 
   # Package installation
@@ -29,7 +30,7 @@ class kernel (
       }
       package { 'kernel_sources':
         name     => $kernel_sources,
-        ensure   => 'latest',
+        ensure   => $ensure,
         tag      => 'buildhost',
         require  => [Portage::Use_flags['kernel_sources']],
       }
